@@ -3,7 +3,7 @@ public class Tile {
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Tile)) {
-            return false;
+            return true;
         }
         Tile tile = (Tile) other;
         return value == tile.value;

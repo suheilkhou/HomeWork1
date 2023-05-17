@@ -14,7 +14,10 @@ public class State {
 
     public Action[] actions(){
         int[] location = findSpace(board);
-
+        if (location[0] == board.getDimensions()[0] - 1 && location[1] != board.getDimensions()[1] - 1){
+            Action[] actions = new Action[3];
+            actions[0] = new Action(board.getTiles()[location[0] - 1][location[1]].getId(),"Down");
+        }
     }
 
     public int[] findSpace(Board board){

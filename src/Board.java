@@ -1,8 +1,21 @@
 import java.util.Arrays;
-
 public class Board {
 
     private int[] dimensions;
+    private Tile[][] tiles;
+
+    public Board(String board){
+        this.dimensions = findDimensions(board);
+        for (int i = 0; i < dimensions[0]; i++){
+            for(int j = 0; i < dimensions[1]; j++) {
+                if ((board.charAt(j) != ' ') && (board.charAt(j) != '|')) {
+                    this.tiles[i][j] = new Tile(board.charAt(j));
+
+                }
+            }
+        }
+
+    }
 
     public int[] getDimensions() {
         return dimensions;
@@ -20,22 +33,7 @@ public class Board {
         this.tiles = tiles;
     }
 
-    private Tile[][] tiles;
 
-
-
-    public Board(String board){
-        this.dimensions = findDimensions(board);
-        for (int i = 0; i < dimensions[0]; i++){
-            for(int j = 0; i < dimensions[1]; j++) {
-                if ((board.charAt(j) != ' ') && (board.charAt(j) != '|')) {
-                    this.tiles[i][j] = new Tile(board.charAt(j));
-
-                }
-            }
-        }
-
-    }
 
     private int[] findDimensions(String board){
         int[] dim = new int[2];

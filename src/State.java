@@ -14,7 +14,12 @@ public class State {
 
     public Action[] actions(){
         int[] location = findSpace(board);
+        boolean lowerRow = location[0] == board.getDimensions()[0] - 1;
+        boolean upperRow = location[0] == 0;
+        boolean leftCol = location[1] == 0;
+        boolean rightCol = location[1] == board.getDimensions()[1] - 1;
         if (location[0] == board.getDimensions()[0] - 1 && location[1] != board.getDimensions()[1] - 1){
+            // Case 1: The space tile is at the lowest row in the board and not in the corner.
             Action[] actions = new Action[3];
             actions[0] = new Action(board.getTiles()[location[0] - 1][location[1]].getId(),"Down");
         }

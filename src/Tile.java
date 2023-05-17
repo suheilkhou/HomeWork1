@@ -1,10 +1,22 @@
 public class Tile {
-    public int value;
-    private static int counter = 1;
+    private final char id;
+    private static int total = 1;
 
-    public Tile(){
-        this.value = counter;
-        counter++;
+    public char getId() {
+        return id;
+    }
+
+    public static int getTotal() {
+        return total;
+    }
+
+    public static void setTotal(int total) {
+        Tile.total = total;
+    }
+
+    public Tile(char value){
+        this.id = value;
+        total++;
     }
 
     @Override
@@ -13,11 +25,11 @@ public class Tile {
             return false;
         }
         Tile tile = (Tile) other;
-        return value == tile.value;
+        return id == tile.id;
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(value);
+        return Integer.hashCode(id);
     }
 }

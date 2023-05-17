@@ -18,11 +18,16 @@ public class State {
         boolean upperRow = location[0] == 0;
         boolean leftCol = location[1] == 0;
         boolean rightCol = location[1] == board.getDimensions()[1] - 1;
-        if (location[0] == board.getDimensions()[0] - 1 && location[1] != board.getDimensions()[1] - 1){
-            // Case 1: The space tile is at the lowest row in the board and not in the corner.
-            Action[] actions = new Action[3];
-            actions[0] = new Action(board.getTiles()[location[0] - 1][location[1]].getId(),"Down");
+        if (!lowerRow && !upperRow && !leftCol && !rightCol){
+            // Case 1: The space tile is not on the sides.
+            Action[] actions = new Action[4];
+            actions[0] = new Action(board.getTiles()[location[0] + 1][location[1]],"up");
+            actions[1] = new Action(board.getTiles()[location[0] - 1][location[1]],"down");
+            actions[2] = new Action(board.getTiles()[location[0]][location[1] - 1],"right");
+            actions[3] = new Action(board.getTiles()[location[0]][location[1] + 1],"left");
+
         }
+
     }
 
     public int[] findSpace(Board board){

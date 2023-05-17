@@ -1,13 +1,13 @@
 public class Action {
-    private char tileNum;
+    private Tile tile;
     private String direction;
 
-    public Action(char tileNum, String direction){
-        this.tileNum = tileNum;
+    public Action(Tile tile, String direction){
+        this.tile = tile;
         this.direction = direction;
     }
 
     public String toString(){
-            return "Move"+tileNum+" "+direction;
+            return "Move"+tile.getId()+" "+direction;
     }
 }

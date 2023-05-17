@@ -3,7 +3,30 @@ public class Node {
     private Node parent;
     private Action action;
 
+    public Node(State state){
+        this.state = state;
+        this.parent = null;
+        this.action = null;
+    }
+
+    public Node(State state, Node parent, Action action){
+        this.state = state;
+        this.parent = parent;
+        this.action = action;
+    }
+
+
     public Node[] expand(){
+        int length = this.state.actions().length;
+        Node[] nodes = new Node[length];
+        for (int i = 0; i < length; i++){
+            nodes[i]
+        }
+
+    }
+
+    public int heuristicValue(){
+        return 0;
     }
 
     public State getState() {

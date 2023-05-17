@@ -9,7 +9,7 @@ public class Board {
         for (int i = 0; i < dimensions[0]; i++){
             for(int j = 0; i < dimensions[1]; j++) {
                 if ((board.charAt(j) != ' ') && (board.charAt(j) != '|')) {
-                    this.tiles[i][j] = new Tile(board.charAt(j));
+                    this.tiles[i][j] = new Tile(board.charAt(j),i ,j);
 
                 }
             }

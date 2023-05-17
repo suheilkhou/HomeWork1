@@ -1,6 +1,7 @@
 public class State {
     private Board board;
 
+
     public boolean isGoal(){
         for (int i = 0; i < board.getDimensions()[0]; i++){
             for (int j = 0; j < board.getDimensions()[1]; j++){
@@ -25,6 +26,7 @@ public class State {
             actions[1] = new Action(board.getTiles()[location[0] - 1][location[1]],"down");
             actions[2] = new Action(board.getTiles()[location[0]][location[1] - 1],"right");
             actions[3] = new Action(board.getTiles()[location[0]][location[1] + 1],"left");
+            System.out.println("sdf");
 
         }
 

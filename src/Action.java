@@ -13,9 +13,13 @@ public class Action {
         } else if (this.direction == Direction.DOWN) {
             return new Action(this.tile, Direction.UP);
         } else if (this.direction == Direction.LEFT) {
-            return new Action(this.tile, Direction.LEFT);
+            return new Action(this.tile, Direction.RIGHT);
         }else
             return new Action(this.tile,Direction.RIGHT);
+    }
+
+    public Action copyAction(){
+        return new Action(this.tile.copyTile(),this.direction);
     }
 
     public Tile getTile() {

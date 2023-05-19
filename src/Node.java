@@ -19,15 +19,27 @@ public class Node {
     public Node[] expand(){
         Action[] actions = this.state.actions();
         int length = actions.length;
-        Node[] nodes = new Node[length-1];
+        Node[] nodes = new Node[length];
         int j = 0;
         for (int i = 0; i < length; i++){
-            if (this.action.getDirection().equals(actions[i].opposite())){
-                break;
+            if (this.action != null) {
+                if (this.action.getDirection().equals(actions[i].opposite().getDirection())) {
+                    break;
+                }
             }
-            nodes[j] = new Node(,this.Node,actions[i]);
+            nodes[j] = new Node(this.state.copyState().result(actions[i]),this.CopyNode(),actions[i]);
+            j++;
         }
         return nodes;
+    }
+
+
+
+    public Node CopyNode(){
+        if (this.parent == null && this.action == null){
+            return new Node(this.state.copyState());
+        }
+        return new Node(this.state.copyState(),this.parent,this.action.copyAction());
     }
 
     public int heuristicValue(){

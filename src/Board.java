@@ -5,15 +5,27 @@ public class Board {
     private Tile[][] tiles;
 
     public Board(String board){
+        // Check!
         this.dimensions = findDimensions(board);
-        tiles = new Tile[dimensions[0]][dimensions[1]];
-        for (int i = 0; i < dimensions[0]; i++){
-            for(int j = 0; i < dimensions[1]; j++) {
-                if ((board.charAt(j) != ' ') && (board.charAt(j) != '|')) {
-                    this.tiles[i][j] = new Tile(board.charAt(j),i , j);
-                }
+        this.tiles = new Tile[dimensions[0]][dimensions[1]];
+        int i = 0;
+        int j = 0;
+        for (int x = 0; x < board.length();x++){
+            if (board.charAt(x) == ' '){
+                j++;
+                continue;
             }
+            if (board.charAt(x) == '|'){
+                i++;
+                j = 0;
+                continue;
+            }
+            this.tiles[i][j] = new Tile(board.charAt(x),i , j);
         }
+    }
+
+    public Board copyBoard(){
+        return new Board(this.dimensions.clone(), this.tiles.clone());
     }
 
     public void moveTile(Tile tile, Direction direction){

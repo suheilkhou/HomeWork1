@@ -5,15 +5,20 @@ public class State {
         this.board = board;
     }
 
+    public State copyState(){
+        return new State(this.board.copyBoard());
+    }
+
 
     public boolean isGoal(){
-        for (int i = 0; i < board.getDimensions()[0]; i++){
-            for (int j = 0; j < board.getDimensions()[1]; j++){
+        int[] dimensions = board.getDimensions();
+        for (int i = 0; i < dimensions[0]; i++){
+            for (int j = 0; j < dimensions[1]; j++){
+                if (!(board.getTiles()[i][j].getId() == (char) (i * dimensions[0] + j + 1))){
+                    return false;
+                }
                 if (i == board.getDimensions()[0]-1 && j == board.getDimensions()[1]){
                     break;
-                }
-                if (!(board.getTiles()[i][j].getId() == (char) (i * board.getDimensions()[0] + j + 1))){
-                    return false;
                 }
             }
         }
@@ -93,7 +98,7 @@ public class State {
             // Case 8: The space tile is in the right lower corner.
             Action[] actions = new Action[1];
             actions[0] = new Action(board.getTiles()[location[0] - 1][location[1]],Direction.DOWN);
-            actions[1] = new Action(board.getTiles()[location[0]][location[1] + 1],Direction.LEFT);
+            actions[1] = new Action(board.getTiles()[location[0]][location[1] + 1],Direction.RIGHT);
             return actions;
         }
 
@@ -101,9 +106,48 @@ public class State {
             // Case 9: The space tile is in the left lower corner.
             Action[] actions = new Action[2];
             actions[0] = new Action(board.getTiles()[location[0] - 1][location[1]],Direction.DOWN);
-            actions[1] = new Action(board.getTiles()[location[0]][location[1] - 1],Direction.RIGHT);
+            actions[1] = new Action(board.getTiles()[location[0]][location[1] - 1],Direction.LEFT);
             return actions;
         }
+        if(lowerRow && upperRow && leftCol && !rightCol){
+            // Case 10: The space tile is in the left(only one rowwww).
+            Action[] actions = new Action[1];
+            actions[0] = new Action(board.getTiles()[location[0]][location[1] + 1],Direction.LEFT);
+            return actions;
+        }
+        if(lowerRow && upperRow && !leftCol && rightCol){
+            // Case 11: The space tile is in the right(only one rowwww).
+            Action[] actions = new Action[1];
+            actions[0] = new Action(board.getTiles()[location[0]][location[1] - 1],Direction.RIGHT);
+            return actions;
+        }
+        if(lowerRow && upperRow && !leftCol && !rightCol){
+            // Case 12: The space tile is in the MIDDLE(only one rowwww).
+            Action[] actions = new Action[2];
+            actions[0] = new Action(board.getTiles()[location[0]][location[1] - 1],Direction.RIGHT);
+            actions[1] = new Action(board.getTiles()[location[0]][location[1] + 1],Direction.LEFT);
+            return actions;
+        }
+        if(!lowerRow && upperRow && leftCol && rightCol){
+            // Case 13: The space tile is at the topp(only one columnnnn).
+            Action[] actions = new Action[1];
+            actions[0] = new Action(board.getTiles()[location[0] + 1][location[1]],Direction.UP);
+            return actions;
+        }
+        if(lowerRow && !upperRow && leftCol && rightCol){
+            // Case 14: The space tile is AT bottom(only one columnnnn).
+            Action[] actions = new Action[1];
+            actions[0] = new Action(board.getTiles()[location[0] - 1][location[1]],Direction.DOWN);
+            return actions;
+        }
+        if(!lowerRow && !upperRow && leftCol && rightCol){
+            // Case 15: The space tile is in the MIDDLE(only one columnnnn).
+            Action[] actions = new Action[2];
+            actions[0] = new Action(board.getTiles()[location[0] + 1][location[1]],Direction.UP);
+            actions[1] = new Action(board.getTiles()[location[0] - 1][location[1]],Direction.DOWN);
+            return actions;
+        }
+
         // Never.
         Action[] a = new Action[1];
         return a;
@@ -114,7 +158,7 @@ public class State {
         int[] location = new int[2];
         for (int i = 0; i < board.getDimensions()[0]; i++){
             for (int j = 0; j < board.getDimensions()[1]; j++){
-                if(board.getTiles()[i][j].getId() == ' '){
+                if(board.getTiles()[i][j].getId() == '_'){
                     location[0] = i;
                     location[1] = j;
                     return location;

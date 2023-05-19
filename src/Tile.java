@@ -1,7 +1,7 @@
 public class Tile {
     private final char id;
-    private static int total = 1;
-    private int[] placement;
+    private static int total = 0;
+    int placement[];
 
     public char getId() {
         return id;
@@ -14,20 +14,15 @@ public class Tile {
         Tile.total = total;
     }
 
-    public int[] getPlacement() {
-        return placement;
-    }
 
-    public void setPlacement(int[] placement) {
-        this.placement = placement;
-    }
-
-    public Tile(char value, int i, int j){
+    public Tile(char value,int i, int j){
         this.id = value;
-        placement[0] = i;
-        placement[1] = j;
+        this.placement[0] = i;
+        this.placement[1] = j;
         total++;
     }
+
+
 
     @Override
     public boolean equals(Object other) {

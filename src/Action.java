@@ -1,21 +1,21 @@
 public class Action {
     private Tile tile;
-    private String direction;
+    private Direction direction;
 
-    public Action(Tile tile, String direction){
+    public Action(Tile tile, Direction direction){
         this.tile = tile;
         this.direction = direction;
     }
 
     public Action opposite(){
-        if (this.direction == "up"){
-            return new Action(this.tile, "down");
-        } else if (this.direction == "down") {
-            return new Action(this.tile, "up");
-        } else if (this.direction == "left") {
-            return new Action(this.tile, "right");
+        if (this.direction == Direction.UP){
+            return new Action(this.tile, Direction.DOWN);
+        } else if (this.direction == Direction.DOWN) {
+            return new Action(this.tile, Direction.UP);
+        } else if (this.direction == Direction.LEFT) {
+            return new Action(this.tile, Direction.LEFT);
         }else
-            return new Action(this.tile,"left");
+            return new Action(this.tile,Direction.RIGHT);
     }
 
     public Tile getTile() {
@@ -26,15 +26,15 @@ public class Action {
         this.tile = tile;
     }
 
-    public String getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
     public String toString(){
-            return "Move"+tile.getId()+" "+direction;
+            return "Move"+tile.getId()+" "+direction.toString().toLowerCase();
     }
 }

@@ -17,12 +17,17 @@ public class Node {
 
 
     public Node[] expand(){
-        int length = this.state.actions().length;
-        Node[] nodes = new Node[length];
+        Action[] actions = this.state.actions();
+        int length = actions.length;
+        Node[] nodes = new Node[length-1];
+        int j = 0;
         for (int i = 0; i < length; i++){
-            nodes[i]
+            if (this.action.getDirection().equals(actions[i].opposite())){
+                break;
+            }
+            nodes[j] = new Node(,this.Node,actions[i]);
         }
-
+        return nodes;
     }
 
     public int heuristicValue(){
